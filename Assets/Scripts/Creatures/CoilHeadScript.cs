@@ -19,8 +19,6 @@ public class CoilHeadScript : Creatures
         objectRenderer = GetComponent<Renderer>();
 
         damage = 90;
-        creature.speed = 50f;
-        creature.acceleration = 50;
 
     }
     private void OnTriggerEnter(Collider other)
@@ -60,14 +58,25 @@ public class CoilHeadScript : Creatures
         }
     }
 
+    private void CoilHeadSpeed()
+    {
+        if (inRange)
+        {
+            creature.speed = 17f;
+            creature.acceleration = 17f;
+        }
+        else
+        {
+            creature.speed = 2f;
+            creature.acceleration = 2f;
+        }
+    }
     private void ChasePlayer()
     {      
         PlayerScript playerScript = player.GetComponent<PlayerScript>();
-        if (playerScript.health > 0)
+        if (playerScript.health > 0 && inRange)
         {
             MoveTowards(player.transform.position);
-            creature.speed = 90f;
-            creature.acceleration = 90f;
         }     
     }
 
@@ -83,5 +92,6 @@ public class CoilHeadScript : Creatures
         {
             Patrol();
         }
+        CoilHeadSpeed();
     }
 }

@@ -63,7 +63,6 @@ public class Creatures : MonoBehaviour
         MoveTowards(destination);
         if (Vector3.Distance(transform.position, destination) < 10)
         {
-            print("I change position:)");
             nodes.Remove(destination);
             Vector3 oldPosition = destination;
             destination = FindingFirstClosestNode(previousNode);
