@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
             if (collider != null)
             {
                 Rigidbody rb = (item as MonoBehaviour)?.GetComponent<Rigidbody>();
-                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                rb.constraints = RigidbodyConstraints.None;
                 items.Remove(item);
                 collider.isTrigger = false;
                 ItemRemoved?.Invoke(this, new InventoryEventArgs(item));

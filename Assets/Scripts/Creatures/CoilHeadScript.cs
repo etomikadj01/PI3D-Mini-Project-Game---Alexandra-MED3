@@ -13,6 +13,11 @@ public class CoilHeadScript : Creatures
     [SerializeField] Renderer objectRenderer;
     [SerializeField] LayerMask layerMask;
 
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     private new void Start()
     {
         base.Start();

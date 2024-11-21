@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     private float range = 20f;
     public int health = 100;
 
+    public static UnityEvent<Collider> interactionEvent = new();
     public void TakeDamage(int amount)
     {
         health -= amount;
@@ -18,14 +20,20 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    //public RaycastHit Interactions()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.E))
-    //    {
-    //        RaycastHit hit;
-    //        Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range);
-    //        return hit;
-    //    }
-    //    return new RaycastHit();
-    //}
+    public void Update()
+    {
+        Interactions();
+    }
+
+    public RaycastHit Interactions()
+    {
+        
+        if (Input.GetKeyDown(KeyCode.E) && Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, range))
+        {
+            Collider colliderHit = hit.collider;
+            interactionEvent?.Invoke(colliderHit);
+            return hit;
+        }
+        return new RaycastHit();
+    }
 }

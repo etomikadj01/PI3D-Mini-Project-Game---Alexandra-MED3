@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class IndoorOutdoorManager : MonoBehaviour
 {
-    [SerializeField] Camera playerCamera;
     [SerializeField] GameObject player;
-    private float range = 20f;
 
-
-    void Update()
+    private void Start()
     {
-        StartShip();
+        PlayerScript.interactionEvent.AddListener(ChangeInterior);
     }
 
-    private void StartShip()
+    private void ChangeInterior(Collider door)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
+        if (door.CompareTag("Door"))
         {
-            if (hit.collider.CompareTag("Button") && Input.GetKeyDown(KeyCode.E))
-            {
-                player.transform.position = new Vector3(0, 0, 0);
-            }
+            player.transform.position = new Vector3(0, 0, 0);
         }
     }
-
 }

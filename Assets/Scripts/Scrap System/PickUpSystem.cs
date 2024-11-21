@@ -8,15 +8,17 @@ public class PickUpSystem : MonoBehaviour
 {
     [SerializeField] Camera playerCamera;
     [SerializeField] Transform itemSlot;
-    private float range = 20f;
     public Inventory inventory;
     public static int objectIndex = 0;
 
+    private void Start()
+    {
+        PlayerScript.interactionEvent.AddListener(HandlePickup);
+    }
+
     void Update()
     {
-        DetectAndHandlePickup();  // ground chechk and remove the rigidbody 
         SwitchItem();
-
         if (Input.GetKeyDown(KeyCode.G) && objectIndex % 4 < inventory.items.Count)
         {
             PickableItem itemToDrop = inventory.items[objectIndex % 4];
@@ -25,20 +27,15 @@ public class PickUpSystem : MonoBehaviour
                 Transform itemToDropTransfrom = (itemToDrop as MonoBehaviour)?.transform;
                 DropItem(itemToDrop, itemToDropTransfrom);
             }
-
         }
     }
 
-    public void DetectAndHandlePickup()
+    public void HandlePickup(Collider pickupable)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
+        var item = pickupable.GetComponent<PickableItem>();
+        if (item != null)
         {
-            var item = hit.collider.GetComponent<PickableItem>();
-            if (item != null && Input.GetKeyDown(KeyCode.E))
-            {
-                PickupItem(item, hit.transform);
-            }
+            PickupItem(item, pickupable.transform);
         }
     }
     private void PickupItem(PickableItem item, Transform itemTransform)
@@ -75,14 +72,5 @@ public class PickUpSystem : MonoBehaviour
         {
             objectIndex = 3;
         }
-
-        //if (objectIndex%4 <= inventory.items.Count - 1)
-        //{
-            //print(objectIndex);
-            //print((inventory.items[objectIndex%4] as MonoBehaviour)?.transform.position);
-        //}
-        
-        //Switching item, so that when i use the mouse wheel the index changes
-        //Mouse scrolling detection: Input.GetAxis("Mouse ScrollWheel"), specify that if (Input.GetAxis("Mouse ScrollWheel") > 0f) {selectedObject ++} and vise versa if opposite
     }
 }

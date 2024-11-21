@@ -8,6 +8,8 @@ TagManager:
   - Node
   - Scrap
   - Button
+  - Door
+  - Ground
   layers:
   - Default
   - TransparentFX
