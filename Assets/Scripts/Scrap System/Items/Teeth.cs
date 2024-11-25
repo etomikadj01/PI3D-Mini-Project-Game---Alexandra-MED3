@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teeth : MonoBehaviour, PickableItem
+public class Teeth : MonoBehaviour, IPickableItem
 {
     int scrapValue = 0;
     protected int min = 60;

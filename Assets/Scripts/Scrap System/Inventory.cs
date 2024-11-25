@@ -7,12 +7,12 @@ public class Inventory : MonoBehaviour
 {
 
     private const int SLOTS = 4;
-    public List<PickableItem> items = new List<PickableItem>();
+    public List<IPickableItem> items = new List<IPickableItem>();
 
     public event EventHandler<InventoryEventArgs> ItemAdded;
     public event EventHandler<InventoryEventArgs> ItemRemoved;
 
-    public bool AddItem(PickableItem item)
+    public bool AddItem(IPickableItem item)
     {
         if (items.Count >= SLOTS)
             return false;
@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public bool RemoveItem(PickableItem item)
+    public bool RemoveItem(IPickableItem item)
     {
         if (items.Contains(item))
         {

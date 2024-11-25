@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Candy : MonoBehaviour, PickableItem
+public class Candy : MonoBehaviour, IPickableItem
 {
     int scrapValue = 0;
     protected int min = 6;

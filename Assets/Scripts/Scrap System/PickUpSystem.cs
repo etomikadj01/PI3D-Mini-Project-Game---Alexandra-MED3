@@ -21,7 +21,7 @@ public class PickUpSystem : MonoBehaviour
         SwitchItem();
         if (Input.GetKeyDown(KeyCode.G) && objectIndex % 4 < inventory.items.Count)
         {
-            PickableItem itemToDrop = inventory.items[objectIndex % 4];
+            IPickableItem itemToDrop = inventory.items[objectIndex % 4];
             if (itemToDrop != null)
             {
                 Transform itemToDropTransfrom = (itemToDrop as MonoBehaviour)?.transform;
@@ -32,13 +32,13 @@ public class PickUpSystem : MonoBehaviour
 
     public void HandlePickup(Collider pickupable)
     {
-        var item = pickupable.GetComponent<PickableItem>();
+        var item = pickupable.GetComponent<IPickableItem>();
         if (item != null)
         {
             PickupItem(item, pickupable.transform);
         }
     }
-    private void PickupItem(PickableItem item, Transform itemTransform)
+    private void PickupItem(IPickableItem item, Transform itemTransform)
     {
         if (inventory.AddItem(item))
         {
@@ -48,7 +48,7 @@ public class PickUpSystem : MonoBehaviour
         }
     }
 
-    private void DropItem(PickableItem item, Transform itemTransform)
+    private void DropItem(IPickableItem item, Transform itemTransform)
     {
         if (inventory.RemoveItem(item))
         {

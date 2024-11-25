@@ -63,6 +63,7 @@ public class InventoryHandler : MonoBehaviour //listens for items being added to
             if (i == index % 4)
             {
                 panel.transform.localScale = new Vector3(scale2, scale2, scale2);
+                
             }
             else
             {

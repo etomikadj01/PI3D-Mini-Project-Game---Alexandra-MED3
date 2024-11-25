@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] Camera playerCamera;
+    public GameObject deathScreenUI;
     private float range = 20f;
     public int health = 100;
 
@@ -16,7 +18,7 @@ public class PlayerScript : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
-            Debug.Log("U dead");
+            PlayerDeathScreen();
         }
     }
 
@@ -35,5 +37,19 @@ public class PlayerScript : MonoBehaviour
             return hit;
         }
         return new RaycastHit();
+    }
+
+    public void PlayerDeathScreen() 
+    {
+        deathScreenUI.SetActive(true);
+        UnityEngine.Cursor.lockState = CursorLockMode.None; 
+        UnityEngine.Cursor.visible = true;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked; 
+        UnityEngine.Cursor.visible = false;
     }
 }

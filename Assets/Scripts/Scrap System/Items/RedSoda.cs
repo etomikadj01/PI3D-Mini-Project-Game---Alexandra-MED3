@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedSoda : MonoBehaviour, PickableItem
+public class RedSoda : MonoBehaviour, IPickableItem
 {
     int scrapValue = 0;
     protected int min = 18;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CreatureSpawner : MonoBehaviour
 {
-    public float spawnTimer = 10.0f;
+    public float spawnTimer = 60.0f;
     [SerializeField] Rigidbody creature;
     [SerializeField] Transform vent;
     [SerializeField] bool hasSpawned = false;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flashlight : MonoBehaviour, PickableItem
+public class Flashlight : MonoBehaviour, IPickableItem
 {
     private int scrapValue = 0;
     public int ScrapValue { get { return scrapValue; } set { scrapValue = value; } }
