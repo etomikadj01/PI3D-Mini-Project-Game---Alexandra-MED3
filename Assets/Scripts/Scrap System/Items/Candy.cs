@@ -29,12 +29,4 @@ public class Candy : MonoBehaviour, IPickableItem
             return _Image;
         }
     }
-
-    public void OnPickup()
-    {
-        transform.rotation = Quaternion.Euler(0, -90, 0);
-        //start animator
-    }
-   
-
 }

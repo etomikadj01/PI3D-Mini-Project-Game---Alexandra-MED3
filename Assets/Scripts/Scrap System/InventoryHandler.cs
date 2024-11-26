@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class InventoryHandler : MonoBehaviour //listens for items being added to the inventory and updates the UI 
+public class InventoryHandler : MonoBehaviour 
 {
+    //Listens for items being added to the inventory and updates the UI 
+
     public Inventory Inventory;
     void Start()
     {
-        Inventory.ItemAdded += InventoryScript_ItemAdded; //Subscribes to the ItemAdded event from the inventory class 
+        //Subscribes to the ItemAdded event and the ItemRemoved event from the Inventory class
+        Inventory.ItemAdded += InventoryScript_ItemAdded; 
         Inventory.ItemRemoved += InventoryScript_ItemRemoved;
     }
 
@@ -17,10 +20,10 @@ public class InventoryHandler : MonoBehaviour //listens for items being added to
     {
         UpdatingSelectedItemUI();
     }
-    private void InventoryScript_ItemAdded(object sender, InventoryEventArgs e) //When an item
+    private void InventoryScript_ItemAdded(object sender, InventoryEventArgs e) //When an item is added, this get's triggered. Adding the new item to a slot in the UI-inventory panel
     {
         Transform inventoryPanel = transform.Find("InventoryPanel"); //finds the inventory panel
-        foreach (Transform slot in inventoryPanel)  //for each slot in the inventory pannel, finds an image and get's it's sprite component 
+        foreach (Transform slot in inventoryPanel)  //for each slot in the inventory pannel, finds an image and get's it's sprite component, enables it
         {
             Image image = slot.GetChild(0).GetComponent<Image>();
 
@@ -34,10 +37,10 @@ public class InventoryHandler : MonoBehaviour //listens for items being added to
         }
     }
  
-    private void InventoryScript_ItemRemoved(object sender, InventoryEventArgs e)
+    private void InventoryScript_ItemRemoved(object sender, InventoryEventArgs e) //When an item is removed, this get's triggered.
     {
         Transform inventoryPanel = transform.Find("InventoryPanel"); //finds the inventory panel
-        foreach (Transform slot in inventoryPanel)  //for each slot in the inventory pannel, finds an image and get's it's sprite component 
+        foreach (Transform slot in inventoryPanel)  //for each slot in the inventory pannel, finds an image and get's it's sprite component, disables it and empties the inventory slot(UI)
         {
             Image image = slot.GetChild(0).GetComponent<Image>();
 
@@ -51,7 +54,7 @@ public class InventoryHandler : MonoBehaviour //listens for items being added to
         }
     }
 
-    private void UpdatingSelectedItemUI()
+    private void UpdatingSelectedItemUI() //Changing the size of the slot based on whether the item is selected
     {
         int index = PickUpSystem.objectIndex;
         Transform inventoryPanel = transform.Find("InventoryPanel");

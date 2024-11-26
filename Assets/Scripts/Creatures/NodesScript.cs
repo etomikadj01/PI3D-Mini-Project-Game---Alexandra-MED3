@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class NodesScript : MonoBehaviour
 {
-    public static List<Vector3> notVisitedNodes { get; private set; } = new();
+    public static List<Vector3> notVisitedNodes { get; private set; } = new(); //A list that will store positions of the nodes.
 
-    private void Awake()
+    private void Awake() 
     {
-        GameObject[] nodesArray = GameObject.FindGameObjectsWithTag("Node");
+        //Finding all of the nodes on the map and storing them in the array. Then looping through them and storring their position in a list.
+        GameObject[] nodesArray = GameObject.FindGameObjectsWithTag("Node"); 
         foreach (GameObject node in nodesArray)
         {
             notVisitedNodes.Add(node.transform.position);

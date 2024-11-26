@@ -30,9 +30,9 @@ public class RedSoda : MonoBehaviour, IPickableItem
         }
     }
 
-    public void OnPickup()
-    {
-        transform.rotation = Quaternion.Euler(0, -90, 0);
-        //start animator
-    }
+    //public void OnPickup()
+    //{
+    //    transform.rotation = Quaternion.Euler(0, -90, 0);
+    //    //start animator
+    //}
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CoilHeadScript : Creatures
 {
-
     [SerializeField] GameObject player;
     [SerializeField] GameObject enemy;
     private bool inRange = false;
@@ -24,9 +23,10 @@ public class CoilHeadScript : Creatures
         objectRenderer = GetComponent<Renderer>();
 
         damage = 90;
-
     }
-    private void OnTriggerEnter(Collider other)
+
+    //Used to check whether the player is inside the detection sphere
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.CompareTag("Player"))
         {
@@ -65,7 +65,7 @@ public class CoilHeadScript : Creatures
 
     private void CoilHeadSpeed()
     {
-        if (inRange)
+        if (playerFound && inRange)
         {
             creature.speed = 17f;
             creature.acceleration = 17f;
@@ -88,7 +88,7 @@ public class CoilHeadScript : Creatures
     private void FixedUpdate()
     {
         CheckIfVisible();
-        //print(GetComponent<Rigidbody>().velocity.magnitude);
+
         if (inRange && playerFound)
         {
             ChasePlayer();
@@ -97,6 +97,7 @@ public class CoilHeadScript : Creatures
         {
             Patrol();
         }
+
         CoilHeadSpeed();
     }
 }

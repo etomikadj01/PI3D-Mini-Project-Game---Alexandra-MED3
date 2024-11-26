@@ -5,16 +5,19 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    //
 
+    //Creating a list that can hold objects that have the interface implemented
     private const int SLOTS = 4;
     public List<IPickableItem> items = new List<IPickableItem>();
 
+    //Declaring two events, each respectivelly being triggered upon adding or removing an item in the methods bellow 
     public event EventHandler<InventoryEventArgs> ItemAdded;
     public event EventHandler<InventoryEventArgs> ItemRemoved;
 
-    public bool AddItem(IPickableItem item)
+    public bool AddItem(IPickableItem item) //Adds the item to the list
     {
-        if (items.Count >= SLOTS)
+        if (items.Count >= SLOTS) //If the inventory is full then don't add the item
             return false;
 
         Collider collider = (item as MonoBehaviour)?.GetComponent<Collider>(); 
@@ -25,8 +28,8 @@ public class Inventory : MonoBehaviour
 
             collider.isTrigger = true;
             items.Add(item); 
-            item.OnPickup();
-            ItemAdded?.Invoke(this, new InventoryEventArgs(item));
+            //item.OnPickup(); //remove
+            ItemAdded?.Invoke(this, new InventoryEventArgs(item)); //Invoking the event if it has listeners, passing this
             return true;
         }
         return false;

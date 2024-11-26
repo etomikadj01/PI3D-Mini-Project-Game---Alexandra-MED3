@@ -7,12 +7,17 @@ using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField] Camera playerCamera;
+    //UI
     public GameObject deathScreenUI;
+
+    //Raycasting
+    [SerializeField] Camera playerCamera;
     private float range = 20f;
+
+    //Health
     public int health = 100;
 
-    public static UnityEvent<Collider> interactionEvent = new();
+    public static UnityEvent<Collider> interactionEvent = new(); //An event that gets fired every time one presses e. The listeners to this event are all of the interactable objects, so the doors, ship button, ladder and the scrap.
     public void TakeDamage(int amount)
     {
         health -= amount;

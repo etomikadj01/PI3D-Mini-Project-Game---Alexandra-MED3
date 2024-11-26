@@ -13,7 +13,7 @@ public class PickUpSystem : MonoBehaviour
 
     private void Start()
     {
-        PlayerScript.interactionEvent.AddListener(HandlePickup);
+        PlayerScript.interactionEvent.AddListener(HandlePickup); 
     }
 
     void Update()
@@ -57,7 +57,7 @@ public class PickUpSystem : MonoBehaviour
         }
     }
 
-    public void SwitchItem()
+    public void SwitchItem() //Switching item with the mouse wheel 
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
