@@ -52,7 +52,6 @@ public class PickUpSystem : MonoBehaviour
     {
         if (inventory.RemoveItem(item))
         {
-            //itemTransform.rotation = Quaternion.identity;
             itemTransform.SetParent(null);
         }
     }
